@@ -39,6 +39,14 @@ public class SataSocket{
         return -1;
     }
 
+    /**
+     *  Function returs supported interface types
+     *  @param  none
+     *  @return Pull of supported interfaces in text format
+     */
+    public String[] GetSupportedInterfaces(){
+        return supportedInterfaces;
+    }
 
     /**
      *  Function checks if CPU socket configured

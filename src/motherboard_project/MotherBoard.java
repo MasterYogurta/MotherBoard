@@ -45,8 +45,8 @@ public class MotherBoard{
         return 1;
     }
     public int ConfigureOnboardDevice(DdrSocket ... ddrSocket){
-        for (DdrSocket socket : ddrSocket){
-            if (socket.IsReady() < (0)){
+        for (DdrSocket check : ddrSocket){
+            if (check.IsReady() < (0)){
                 return debug.ErrorLog((-2), "Failed to configure ddrSocket");
             }
         }
@@ -55,8 +55,8 @@ public class MotherBoard{
         return 1;
     }
     public int ConfigureOnboardDevice(SataSocket ... sataSocket){
-        for (SataSocket socket : sataSocket){
-            if (socket.IsReady() < (0)){
+        for (SataSocket check : sataSocket){
+            if (check.IsReady() < (0)){
                 return debug.ErrorLog((-3), "Failed to configure sataSocket");
             }
         }
@@ -65,8 +65,8 @@ public class MotherBoard{
         return 1;
     }
     public int ConfigureOnboardDevice(PciSocket ... pciSocket){
-        for (PciSocket socket : pciSocket){
-            if (socket.IsReady() < (0)){
+        for (PciSocket check : pciSocket){
+            if (check.IsReady() < (0)){
                 return debug.ErrorLog((-4), "Failed to configure pciSocket");
             }
         }
@@ -97,5 +97,98 @@ public class MotherBoard{
         this.ethernetModem = ethernetModem;
         debug.UserLog("EthernetModem configured");
         return 1;
+    }
+    //--------------------------------------------------------------------------------------------------------
+    /**
+     *  Funciton checks is all motherboard sockets and onboard devices are configured
+     *  @param  none
+     *  @retrun 1 if all modules are configured, else error code (less than 0)
+     */
+    public int IsMotherBoardConfigured(){
+        boolean configuredFlag = true;
+        String nConfList = new String();
+
+        if (cpuSocket == null)      { configuredFlag = false; nConfList += " cpuSocket"; }
+        if (ddrSocket == null)      { configuredFlag = false; nConfList += " ddrSocket"; }
+        if (sataSocket == null)     { configuredFlag = false; nConfList += " sataSocket"; }
+        if (pciSocket == null)      { configuredFlag = false; nConfList += " pciSocket"; }
+        if (soundCard == null)      { configuredFlag = false; nConfList += " soundCard"; }
+        if (usbHub == null)         { configuredFlag = false; nConfList += " usbHub"; }
+        if (ethernetModem == null)  { configuredFlag = false; nConfList += " ethernetModem"; }
+
+        if (configuredFlag == true){
+            debug.UserLog("All motherboard modules are configured");
+            return 1;
+        } else {
+            return debug.ErrorLog(-1, "Motherboard is not configured. Modules:" + nConfList);
+        }
+    }
+
+    /**
+     *  Function displays current motherboard configuration
+     *  @param  none
+     *  @return none
+     */
+    public void DisplayConfig(){
+        // ethernetModem
+        String[] textBuffer;
+        String string = new String();
+        int[] integerBuffer;
+        int number;
+        double dobuleBuffer;
+
+        if (IsMotherBoardConfigured() > 0){
+            // CPU Socket
+            debug.UserLog("CPU:");
+            textBuffer = cpuSocket.GetSupportedSockets();
+            for (String check : textBuffer){ string += (" | " + check); }
+            debug.UserLog("\tsupported sockets\t\t" + string);
+            // DDR Socket
+            debug.UserLog("DDR:");
+            for (DdrSocket sock : ddrSocket){
+                textBuffer = sock.GetSupportedFamilies();
+                string = "";
+                for (String check : textBuffer){ string += (" | " + check); }
+                debug.UserLog("\tsupported families\t\t" + string);
+            }
+            for (DdrSocket sock : ddrSocket){
+                integerBuffer = sock.GetSupportedFrequencies();
+                string = "";
+                for (int check : integerBuffer){ string += (" | " + String.valueOf(check)); }
+                debug.UserLog("\tsupported frequencies\t" + string);
+            }
+            // SATA
+            debug.UserLog("SATA:");
+            for (SataSocket sock : sataSocket){
+                textBuffer = sock.GetSupportedInterfaces();
+                string = "";
+                for (String check : textBuffer){ string += (" | " + check); }
+                debug.UserLog("\tsupported interfaces\t" + string);
+            }
+            // PCI
+            debug.UserLog("PCI:");
+            for (PciSocket sock : pciSocket){
+                number = sock.GetSupportedBusWidth();
+                string = (" | " + String.valueOf(number));
+                debug.UserLog("\tsupported bus width\t\t" + string);
+            }
+            // SoundCard
+            debug.UserLog("SoundCard:");
+            dobuleBuffer = soundCard.GetSupportedChannel();
+            string = (" | " + String.valueOf(dobuleBuffer));
+            debug.UserLog("\tsupported channels\t\t" + string);
+            // USB Hub
+            debug.UserLog("USB Hub:");
+            textBuffer = usbHub.GetSupportedInterfaces();
+            string = "";
+            for (String check : textBuffer){ string += (" | " + check); }
+            debug.UserLog("\tsupported interfaces\t" + string);
+            // Ethernet Modem
+            debug.UserLog("Ethernet Modem:");
+            textBuffer = ethernetModem.GetSupportedStandards();
+            string = "";
+            for (String check : textBuffer){ string += (" | " + check); }
+            debug.UserLog("\tsupported standards\t\t" + string);
+        }
     }
 }

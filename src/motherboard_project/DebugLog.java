@@ -20,7 +20,7 @@ public class DebugLog{
     public int ErrorLog(int errorCode, String ... errorMessage){
         System.out.print("[ERR] : (" + errorCode + ") | ");
         for (String message : errorMessage){
-            System.out.print(message);
+            System.out.print(" " + message);
         }
         System.out.println();
         return errorCode;

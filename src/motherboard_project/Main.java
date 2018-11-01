@@ -33,13 +33,24 @@ public class Main {
         MotherBoard motherboard1        = new MotherBoard();
 
         cpuSocket1.ConfigureSocket("22", "AM3825", "MahNigga");
+        ddrSocket1.ConfigureFamilyTypes("DDR2", "DDR3");
+        ddrSocket1.ConfigureFrequency(2222, 1300, 2666);
+        sataSocket1.ConfigureInterface("SATA 2.0");
+        pciSocket1.ConfigureBusWidth(128);
+        soundCard1.ConfigureChannel(2.0);
+        usbHub1.ConfigureInterface("USB2.0");
+        ethernetModem1.ConfigureInterface("10Mbit", "100Mbit");
 
+        motherboard1.IsMotherBoardConfigured();
         motherboard1.ConfigureOnboardDevice(cpuSocket1);
         motherboard1.ConfigureOnboardDevice(ddrSocket1);
         motherboard1.ConfigureOnboardDevice(sataSocket1);
         motherboard1.ConfigureOnboardDevice(pciSocket1);
         motherboard1.ConfigureOnboardDevice(soundCard1);
+        motherboard1.IsMotherBoardConfigured();
         motherboard1.ConfigureOnboardDevice(usbHub1);
         motherboard1.ConfigureOnboardDevice(ethernetModem1);
+        motherboard1.IsMotherBoardConfigured();
+        motherboard1.DisplayConfig();
     }
 }

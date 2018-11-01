@@ -75,6 +75,24 @@ public class DdrSocket{
     }
 
     /**
+     *  Function returs supported famyly types
+     *  @param  none
+     *  @return Pull of supported families in text format
+     */
+    public String[] GetSupportedFamilies(){
+        return supportedFamilyTypes;
+    }
+
+    /**
+     *  Function returs supported frequencies
+     *  @param  none
+     *  @return Pull of supported frequencies in decimal format
+     */
+    public int[] GetSupportedFrequencies(){
+        return supportedFrequency;
+    }
+
+    /**
      *  Function checks if DDR socket configured
      *  @param  none
      *  @return 1 if DDR socket configured, else error code (less than 0)

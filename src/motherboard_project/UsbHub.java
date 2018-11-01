@@ -11,7 +11,14 @@ public class UsbHub{
      *  @return Number of configured interfaces or error code (less than 0)
      */
     public int ConfigureInterface(String ... interfaceTypePull){
-        return 0;
+        if (supportedInterfaces != null) {
+            return -2;
+        } else if (interfaceTypePull.length > 0) {
+            supportedInterfaces = interfaceTypePull;
+        } else {
+            return -1;
+        }
+        return 1;
     }
 
     /**
@@ -20,7 +27,25 @@ public class UsbHub{
      *  @return 1 if interface supported, else error code (less than 0)
      */
     public int IfInterfaceSupported(String interfaceType){
-        return 0;
+        if (supportedInterfaces != null){
+            for (String check : supportedInterfaces){
+                if (check.compareTo(interfaceType) == 0){
+                    return 1;
+                }
+            }
+        } else {
+            return -22;
+        }
+        return -1;
+    }
+
+    /**
+     *  Function returs supported socket types
+     *  @param  none
+     *  @return Pull of supported sockets in text format
+     */
+    public String[] GetSupportedInterfaces(){
+        return supportedInterfaces;
     }
 
     /**
@@ -29,6 +54,9 @@ public class UsbHub{
      *  @return 1 if USB hub configured, else error code (less than 0)
      */
     public int IsReady(){
-        return 0;
+        if (supportedInterfaces != null){
+            return 1;
+        }
+        return -22;
     }
 }

@@ -38,6 +38,15 @@ public class CpuSocket{
         }
         return -1;
     }
+    
+    /**
+     *  Function returs supported socket types
+     *  @param  none
+     *  @return Pull of supported sockets in text format
+     */
+    public String[] GetSupportedSockets(){
+        return supportedSockets;
+    }
 
     /**
      *  Function checks if CPU socket configured
