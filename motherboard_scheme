@@ -1,0 +1,45 @@
+graph LR
+    subgraph Motherboard
+        CPU_SOC{CPU Socket}
+        DDR_SOC{DDR}
+        SATA_SOC{SATA}
+        PCI_SOC{PCI}
+        USB_SOC{USB}
+        ETH_SOC{LAN}
+        SOUND_SOC{Audio}
+        CPU[CPU]
+        SOUND_CARD[Sound Card]
+        USB_HUB[USB Hub]
+        ETH_PHY[Ethernet]
+        GPU[GPU]
+        HDD[HDD]
+        RAM[RAM]
+
+        POWER_SUPPLY((Power Supply))
+    end
+
+    USB_FLASH((USB Flash))
+    SERVER((SERVER))
+    MONITOR((Monitor))
+    SPEAKER((Speaker))
+
+    %% Schematic
+    %% Onboard links
+    CPU --- CPU_SOC
+    CPU_SOC -.- |DDR| DDR_SOC
+    CPU_SOC -.- |SATA| SATA_SOC
+    CPU_SOC -.- |PCI| PCI_SOC
+    CPU_SOC -.- |USB| USB_HUB
+    USB_HUB --- |USB| USB_SOC
+    CPU_SOC -.- |Ethernet| ETH_PHY
+    ETH_PHY --- |Ethernet| ETH_SOC
+    PCI_SOC --- |PCI| GPU
+    SATA_SOC --- |SATA| HDD
+    DDR_SOC --- |DDR| RAM
+    CPU_SOC -.- |I2S| SOUND_CARD
+    SOUND_CARD --- |Analog| SOUND_SOC
+    %% External links
+    USB_SOC === |USB| USB_FLASH
+    ETH_SOC === |Ethernet| SERVER
+    GPU === |HDMI/VGA| MONITOR
+    SOUND_SOC === |Analog| SPEAKER
