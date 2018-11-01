@@ -3,7 +3,7 @@
 package ethernet_modem;
 
 public class EthernetModem{
-    private String supportedStandard[];
+    private String supportedStandards[];
 
     /**
      *  Function configures supported standard types
@@ -11,7 +11,14 @@ public class EthernetModem{
      *  @return Number of configured standards or error code (less than 0)
      */
     public int ConfigureInterface(String ... standardPull){
-        return 0;
+        if (supportedStandards != null) {
+            return -2;
+        } else if (standardPull.length > 0) {
+            supportedStandards = standardPull;
+        } else {
+            return -1;
+        }
+        return 1;
     }
 
     /**
@@ -20,7 +27,25 @@ public class EthernetModem{
      *  @return 1 if standard supported, else error code (less than 0)
      */
     public int IfStandardSupported(String standardType){
-        return 0;
+        if (supportedStandards != null){
+            for (String check : supportedStandards){
+                if (check.compareTo(standardType) == 0){
+                    return 1;
+                }
+            }
+        } else {
+            return -22;
+        }
+        return -1;
+    }
+
+    /**
+     *  Function returs supported standard types
+     *  @param  none
+     *  @return Pull of supported standards in text format
+     */
+    public String[] GetSupportedStandards(){
+        return supportedStandards;
     }
 
     /**
@@ -29,6 +54,9 @@ public class EthernetModem{
      *  @return 1 if ethernet modem configured, else error code (less than 0)
      */
     public int IsReady(){
-        return 0;
+        if (supportedStandards != null){
+            return 1;
+        }
+        return -22;
     }
 }
