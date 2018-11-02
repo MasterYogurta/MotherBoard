@@ -18,7 +18,11 @@ public class DebugLog{
      *  @return errorCode
      */
     public int ErrorLog(int errorCode, String ... errorMessage){
-        System.out.print("[ERR] : (" + errorCode + ") | ");
+        if (errorCode < 0){
+            System.out.print("[ERR] : (" + errorCode + ") | ");
+        } else {
+            System.out.print("[SUC] : (" + errorCode + ") | ");
+        }
         for (String message : errorMessage){
             System.out.print(" " + message);
         }

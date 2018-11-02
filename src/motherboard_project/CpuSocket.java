@@ -2,8 +2,11 @@
 
 package cpu_socket;
 
+import cpu_device.CpuDevice;
+
 public class CpuSocket{
     private String supportedSockets[];
+    private CpuDevice device;
 
     /**
      *  Function configures supported socket types
@@ -38,7 +41,7 @@ public class CpuSocket{
         }
         return -1;
     }
-    
+
     /**
      *  Function returs supported socket types
      *  @param  none
@@ -58,5 +61,56 @@ public class CpuSocket{
             return 1;
         }
         return -22;
+    }
+
+    /**
+     *  Function checks is current socket free
+     *  @param  none
+     *  @return 1 if socket is free, else error code (less than 0)
+     */
+    public int IsFree(){
+        if (device == null){
+            return 1;
+        }
+        return -1;
+    }
+
+    /**
+     *  Function inserts device in socket
+     *  @param  device: Configred CPU device object
+     *  @return 1 if device was successfully inserted, else error code (less than 0)
+     */
+    public int InsertDevice(CpuDevice device){
+        if (IsFree() < 0){
+            return -1;
+        } else if (device == null){
+            return -2;
+        } else if (IfSocketSupported(device.GetSocketType()) < 0){
+            return -3;
+        }
+        this.device = device;
+        return 1;
+    }
+
+    /**
+     *  Function ejects device from socket
+     *  @param  none
+     *  @return 1 if device was successfully ejected, else error code (less than 0)
+     */
+    public int EjectDevice(){
+        if (IsFree() < 0){
+            return -1;
+        }
+        device = null;
+        return 1;
+    }
+
+    /**
+     *  Function returns object with current inserted device
+     *  @param  none
+     *  @return @device
+     */
+    public CpuDevice GetDevice(){
+        return device;
     }
 }

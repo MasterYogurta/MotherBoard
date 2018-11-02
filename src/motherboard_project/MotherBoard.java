@@ -10,6 +10,8 @@ import sound_card.SoundCard;
 import usb_hub.UsbHub;
 import ethernet_modem.EthernetModem;
 
+import cpu_device.CpuDevice;
+
 import debug_log.DebugLog;
 
 public class MotherBoard{
@@ -21,6 +23,8 @@ public class MotherBoard{
     private SoundCard soundCard;
     private UsbHub usbHub;
     private EthernetModem ethernetModem;
+    // Onboard API
+    private CpuApi cpuApi = new CpuApi();
     // Other
     private DebugLog debug = new DebugLog();
 
@@ -123,7 +127,7 @@ public class MotherBoard{
             return debug.ErrorLog(-1, "Motherboard is not configured. Modules:" + nConfList);
         }
     }
-
+    //--------------------------------------------------------------------------------------------------------
     /**
      *  Function displays current motherboard configuration
      *  @param  none
@@ -189,6 +193,50 @@ public class MotherBoard{
             string = "";
             for (String check : textBuffer){ string += (" | " + check); }
             debug.UserLog("\tsupported standards\t\t" + string);
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------
+    // Insert given device
+    /**
+     *  Functions below inserts given device to specific socket
+     *  @param  device: Object with configured device
+     *  @return 1 if device successfully inserted, else error code (less than 0)
+     */
+    public int InsertDevice(CpuDevice device){
+        int endcode;
+        endcode = cpuApi.InsertDevice(cpuSocket, device);
+        debug.ErrorLog(endcode, "CpuApi > InsertDevice");
+        if (endcode < 0){
+            return -1;
+        }
+        return 1;
+    }
+    //--------------------------------------------------------------------------------------------------------
+    // CPU device API
+    private class CpuApi{
+        /**
+         *  @see    cpu_socket.CpuSocket.IsFree
+         */
+        public int IsFree(CpuSocket socket){
+            return socket.IsFree();
+        }
+        /**
+         *  @see    cpu_socket.CpuSocket.InsertDevice
+         */
+        public int InsertDevice(CpuSocket socket, CpuDevice device){
+            return socket.InsertDevice(device);
+        }
+        /**
+         *  @see    cpu_socket.CpuSocket.EjectDevice
+         */
+        public int EjectDevice(CpuSocket socket){
+            return socket.EjectDevice();
+        }
+        /**
+         *  @see    cpu_socket.CpuSocket.GetDevice
+         */
+        public CpuDevice GetDevice(CpuSocket socket){
+            return socket.GetDevice();
         }
     }
 }

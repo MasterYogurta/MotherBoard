@@ -12,6 +12,8 @@ import sound_card.SoundCard;
 import usb_hub.UsbHub;
 import ethernet_modem.EthernetModem;
 
+import cpu_device.CpuDevice;
+
 import debug_log.DebugLog;
 
 public class Main {
@@ -22,6 +24,7 @@ public class Main {
     }
 
     public static void ConfigureMotherboard(){
+        // Motherboard
         CpuSocket cpuSocket1            = new CpuSocket();
         DdrSocket ddrSocket1            = new DdrSocket();
         SataSocket sataSocket1          = new SataSocket();
@@ -32,6 +35,10 @@ public class Main {
 
         MotherBoard motherboard1        = new MotherBoard();
 
+        // Devices
+        CpuDevice cpuDevice1            = new CpuDevice("AMD", "22", 6, 4.4, 120);
+
+        // Motherboard confif
         cpuSocket1.ConfigureSocket("22", "AM3825", "MahNigga");
         ddrSocket1.ConfigureFamilyTypes("DDR2", "DDR3");
         ddrSocket1.ConfigureFrequency(2222, 1300, 2666);
@@ -41,6 +48,7 @@ public class Main {
         usbHub1.ConfigureInterface("USB2.0");
         ethernetModem1.ConfigureInterface("10Mbit", "100Mbit");
 
+        // Configure motherboard
         motherboard1.IsMotherBoardConfigured();
         motherboard1.ConfigureOnboardDevice(cpuSocket1);
         motherboard1.ConfigureOnboardDevice(ddrSocket1);
@@ -52,5 +60,8 @@ public class Main {
         motherboard1.ConfigureOnboardDevice(ethernetModem1);
         motherboard1.IsMotherBoardConfigured();
         motherboard1.DisplayConfig();
+
+        // Insert device
+        motherboard1.InsertDevice(cpuDevice1);
     }
 }
