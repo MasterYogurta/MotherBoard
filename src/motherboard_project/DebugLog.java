@@ -4,7 +4,7 @@ package debug_log;
 
 public class DebugLog{
     private final boolean useUserLog = true;
-    private final boolean useErrorLog = true;
+    private final boolean useErrorLog = false;
 
     public void UserLog(String ... userMessage){
         if (useUserLog == true){

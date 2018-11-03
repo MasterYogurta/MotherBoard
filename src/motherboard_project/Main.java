@@ -27,6 +27,8 @@ public class Main {
 
     public static void main(String[] args) {
         ConfigureMotherboard();
+
+        String string = new String();
     }
 
     public static void ConfigureMotherboard(){
@@ -79,6 +81,7 @@ public class Main {
         motherboard1.DisplayConfig();
 
         // Insert devices
+        motherboard1.DisplayPeripheral();
         motherboard1.InsertDevice(cpuDevice1);
         motherboard1.InsertDevice(ddrDevice1, 2);
         motherboard1.InsertDevice(ddrDevice2, 1);
@@ -89,6 +92,7 @@ public class Main {
         motherboard1.InsertDevice(usbFlash1);
 
         // Eject devices
+        motherboard1.DisplayPeripheral();
         motherboard1.EjectDevice(cpuDevice1);
         motherboard1.EjectDevice(ddrDevice1, 2);
         motherboard1.EjectDevice(ddrDevice2, 1);
@@ -97,5 +101,6 @@ public class Main {
         motherboard1.EjectDevice(hddDevice1, 1);
         motherboard1.EjectDevice(speakerDevice1);
         motherboard1.EjectDevice(usbFlash1);
+        motherboard1.DisplayPeripheral();
     }
 }

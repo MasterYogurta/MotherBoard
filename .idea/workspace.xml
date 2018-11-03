@@ -45,15 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/motherboard_project/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
-              <folding>
-                <element signature="e#623#624#0" expanded="true" />
-                <element signature="e#661#662#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="309">
+              <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -107,11 +103,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/motherboard_project/MotherBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="785">
-              <caret line="531" column="27" selection-start-line="531" selection-start-column="27" selection-end-line="531" selection-end-column="27" />
+            <state relative-caret-position="199">
+              <caret line="276" column="39" selection-start-line="276" selection-start-column="39" selection-end-line="276" selection-end-column="39" />
+              <folding>
+                <element signature="e#14411#14412#0" expanded="true" />
+                <element signature="e#14489#14490#0" expanded="true" />
+                <element signature="e#16894#16895#0" expanded="true" />
+                <element signature="e#16969#16970#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -243,12 +245,12 @@
       <workItem from="1541102918836" duration="3491000" />
       <workItem from="1541106590914" duration="10919000" />
       <workItem from="1541193669567" duration="4143000" />
-      <workItem from="1541257405609" duration="9638000" />
+      <workItem from="1541257405609" duration="11090000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28191000" />
+    <option name="totallyTimeSpent" value="29643000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -272,7 +274,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989059" weight="0.32948583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47974414" visible="true" weight="0.4033264" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4792111" visible="true" weight="0.4033264" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" weight="0.3991684" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -280,8 +282,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989059" weight="0.32948583" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.52025586" side_tool="true" visible="true" weight="0.4033264" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.45042643" weight="0.32848233" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5207889" side_tool="true" visible="true" weight="0.4033264" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.44936034" weight="0.32848233" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -329,13 +331,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/motherboard_project/MotherBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="531" column="27" selection-start-line="531" selection-start-column="27" selection-end-line="531" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/motherboard_project/SataSocket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -356,11 +351,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/motherboard_project/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+        <state relative-caret-position="309">
+          <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/motherboard_project/MotherBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="276" column="39" selection-start-line="276" selection-start-column="39" selection-end-line="276" selection-end-column="39" />
           <folding>
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#14411#14412#0" expanded="true" />
+            <element signature="e#14489#14490#0" expanded="true" />
+            <element signature="e#16894#16895#0" expanded="true" />
+            <element signature="e#16969#16970#0" expanded="true" />
           </folding>
         </state>
       </provider>

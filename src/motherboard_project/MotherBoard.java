@@ -141,12 +141,10 @@ public class MotherBoard{
     }
     //--------------------------------------------------------------------------------------------------
     /**
-     *  Function displays current motherboard configuration
-     *  @param  none
-     *  @return none
+     *  Function displays current motherboard configuration - parameters for all configured sockets and
+     *  onboard devices. All not configured devices and sockets displays with error code
      */
     public void DisplayConfig(){
-        // ethernetModem
         String[] textBuffer;
         String string = new String();
         int[] integerBuffer;
@@ -205,6 +203,154 @@ public class MotherBoard{
             debug.UserLog("\tsupported standards\t\t" + string);
         }
     }
+
+    /**
+     *  Funciton displays parameters of all connected to motherboard peripheral devices
+     */
+    public void DisplayPeripheral(){
+        debug.UserLog("Peripheral devices: ");
+
+        DisplayPeripheralDevice(cpuSocket);
+        DisplayPeripheralDevice(ddrSocket);
+        DisplayPeripheralDevice(sataSocket);
+        DisplayPeripheralDevice(pciSocket);
+        DisplayPeripheralDevice(soundCard);
+        DisplayPeripheralDevice(usbHub);
+        DisplayPeripheralDevice(ethernetModem);
+    }
+
+    /**
+     *  Funcitons below display information about connected peripheral devices
+     *  @param  cpuSocket: Configured CpuSocket object
+     *  @param  ddrSocket: Configured DdrSocket object
+     *  @param  sataSocket: Configured SataSocket object
+     *  @param  pciSocket: Configured PciSocket object
+     *  @param  soundCard: Configured SoundCard object
+     *  @param  usbHub: Configured UsbHub object
+     *  @param  ethernetModem: Configured EthernetModem object
+     */
+     private void DisplayPeripheralDevice(CpuSocket socket){
+         CpuDevice device;
+         String message = new String();
+
+         debug.UserLog("\tCPU device:");
+         device = cpuApi.GetDevice(socket);
+         if (device != null){
+             message += (device.GetVendorName() + " | ");
+             message += (device.GetSocketType() + " | ");
+             message += (device.GetCoresNumber() + " | ");
+             message += (device.GetCoreFrequency() + " | ");
+             message += (device.GetPowerRequierement() + " | ");
+             debug.UserLog("\t\t" + message);
+         } else {
+             debug.UserLog("\t\t---NO DEVICE---");
+         }
+     }
+
+     private void DisplayPeripheralDevice(DdrSocket ... socket){
+         DdrDevice device;
+         String message = new String();
+
+         debug.UserLog("\tDDR devices:");
+         for (DdrSocket object : socket){
+             device = ddrApi.GetDevice(object);
+             if (device != null){
+                 message += (device.GetVendorName() + " | ");
+                 message += (device.GetFamilyType() + " | ");
+                 message += (device.GetFrequency() + " | ");
+                 message += (device.GetTiming() + " | ");
+                 message += (device.GetPowerRequierement() + " | ");
+                 debug.UserLog("\t\t" + message);
+             } else {
+                 debug.UserLog("\t\t---NO DEVICE---");
+             }
+             message = "";
+         }
+     }
+
+     private void DisplayPeripheralDevice(SataSocket ... socket){
+         HddDevice device;
+         String message = new String();
+
+         debug.UserLog("\tHDD devices:");
+         for (SataSocket object : socket){
+             device = sataApi.GetDevice(object);
+             if (device != null){
+                 message += (device.GetVendorName() + " | ");
+                 message += (device.GetInterfaceType() + " | ");
+                 message += (device.GetCapacity() + " | ");
+                 message += (device.GetPowerRequierement() + " | ");
+                 debug.UserLog("\t\t" + message);
+             } else {
+                 debug.UserLog("\t\t---NO DEVICE---");
+             }
+             message = "";
+         }
+     }
+
+     private void DisplayPeripheralDevice(PciSocket ... socket){
+         GpuDevice device;
+         String message = new String();
+
+         debug.UserLog("\tGPU devices:");
+         for (PciSocket object : socket){
+             device = pciApi.GetDevice(object);
+             if (device != null){
+                 message += (device.GetVendorName() + " | ");
+                 message += (device.GetBusWidth() + " | ");
+                 message += (device.GetVideoMemory() + " | ");
+                 message += (device.GetVideoInterface() + " | ");
+                 message += (device.GetPowerRequierement() + " | ");
+                 debug.UserLog("\t\t" + message);
+             } else {
+                 debug.UserLog("\t\t---NO DEVICE---");
+             }
+             message = "";
+         }
+     }
+
+     private void DisplayPeripheralDevice(SoundCard socket){
+         SpeakerDevice device;
+         String message = new String();
+
+         debug.UserLog("\tSpeaker device:");
+         device = soundcardApi.GetDevice(socket);
+         if (device != null){
+             message += (device.GetChannel() + " | ");
+             debug.UserLog("\t\t" + message);
+         } else {
+             debug.UserLog("\t\t---NO DEVICE---");
+         }
+     }
+
+     private void DisplayPeripheralDevice(UsbHub socket){
+         UsbFlash device;
+         String message = new String();
+
+         debug.UserLog("\tUSB Flash device:");
+         device = usbApi.GetDevice(socket);
+         if (device != null){
+             message += (device.GetInterfaceType() + " | ");
+             message += (device.GetCapacity() + " | ");
+             debug.UserLog("\t\t" + message);
+         } else {
+             debug.UserLog("\t\t---NO DEVICE---");
+         }
+     }
+
+     private void DisplayPeripheralDevice(EthernetModem socket){
+         EthernetDevice device;
+         String message = new String();
+
+         debug.UserLog("\tEthernet devices:");
+         device = ethernetApi.GetDevice(socket);
+         if (device != null){
+             message += (device.GetStandard() + " | ");
+             debug.UserLog("\t\t" + message);
+         } else {
+             debug.UserLog("\t\t---NO DEVICE---");
+         }
+     }
     //--------------------------------------------------------------------------------------------------
     // Insert given device
     /**
