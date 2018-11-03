@@ -61,7 +61,13 @@ public class Main {
         motherboard1.IsMotherBoardConfigured();
         motherboard1.DisplayConfig();
 
+        CpuDevice emptyDevice = new CpuDevice();
+
         // Insert device
         motherboard1.InsertDevice(cpuDevice1);
+        motherboard1.InsertDevice(emptyDevice);
+
+        // Eject device
+        motherboard1.EjectDevice(emptyDevice);
     }
 }

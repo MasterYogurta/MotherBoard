@@ -28,7 +28,7 @@ public class MotherBoard{
     // Other
     private DebugLog debug = new DebugLog();
 
-    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     /**
      *  Funcitons below configure onboard devices and sockets : CPU, DDR, SATA, PCI, SoundCard, USB Hub and Ethernet Modem
      *  @param cpuSocket: Configred CpuSocket object
@@ -102,7 +102,7 @@ public class MotherBoard{
         debug.UserLog("EthernetModem configured");
         return 1;
     }
-    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     /**
      *  Funciton checks is all motherboard sockets and onboard devices are configured
      *  @param  none
@@ -127,7 +127,7 @@ public class MotherBoard{
             return debug.ErrorLog(-1, "Motherboard is not configured. Modules:" + nConfList);
         }
     }
-    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     /**
      *  Function displays current motherboard configuration
      *  @param  none
@@ -195,48 +195,63 @@ public class MotherBoard{
             debug.UserLog("\tsupported standards\t\t" + string);
         }
     }
-    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     // Insert given device
     /**
-     *  Functions below inserts given device to specific socket
-     *  @param  device: Object with configured device
+     *  Function inserts given device to CPU socket
+     *  @param  device: Configred CPU device object
      *  @return 1 if device successfully inserted, else error code (less than 0)
      */
     public int InsertDevice(CpuDevice device){
-        int endcode;
-        endcode = cpuApi.InsertDevice(cpuSocket, device);
-        debug.ErrorLog(endcode, "CpuApi > InsertDevice");
-        if (endcode < 0){
-            return -1;
-        }
-        return 1;
+        return ((cpuApi.InsertDevice(cpuSocket, device) < 0) ? -1 : 1);
     }
-    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
+    // Eject given device
+    /**
+     *  Function ejects CPU device
+     *  @param  device: Empty CPU device object
+     *  @return CPU device object, if it exists, else null
+     */
+    public CpuDevice EjectDevice(CpuDevice device){
+        device = cpuApi.GetDevice(cpuSocket);
+        cpuApi.EjectDevice(cpuSocket);
+        return device;
+    }
+    //--------------------------------------------------------------------------------------------------
     // CPU device API
     private class CpuApi{
         /**
          *  @see    cpu_socket.CpuSocket.IsFree
          */
         public int IsFree(CpuSocket socket){
-            return socket.IsFree();
+            int endcode;
+            endcode = socket.IsFree();
+            return debug.ErrorLog(endcode, "CpuApi > IsFree");
         }
         /**
          *  @see    cpu_socket.CpuSocket.InsertDevice
          */
         public int InsertDevice(CpuSocket socket, CpuDevice device){
-            return socket.InsertDevice(device);
+            int endcode;
+            endcode = socket.InsertDevice(device);
+            return debug.ErrorLog(endcode, "CpuApi > InsertDevice");
         }
         /**
          *  @see    cpu_socket.CpuSocket.EjectDevice
          */
         public int EjectDevice(CpuSocket socket){
-            return socket.EjectDevice();
+            int endcode;
+            endcode = socket.EjectDevice();
+            return debug.ErrorLog(endcode, "CpuApi > EjectDevice");
         }
         /**
          *  @see    cpu_socket.CpuSocket.GetDevice
          */
         public CpuDevice GetDevice(CpuSocket socket){
-            return socket.GetDevice();
+            CpuDevice device;
+            device = socket.GetDevice();
+            debug.ErrorLog(((device == null) ? -1 : 1), "CpuApi > GetDevice");
+            return device;
         }
     }
 }

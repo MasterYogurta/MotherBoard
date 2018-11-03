@@ -85,8 +85,10 @@ public class CpuSocket{
             return -1;
         } else if (device == null){
             return -2;
-        } else if (IfSocketSupported(device.GetSocketType()) < 0){
+        } else if (device.IsConfigured() < 0) {
             return -3;
+        } else if (IfSocketSupported(device.GetSocketType()) < 0){
+            return -4;
         }
         this.device = device;
         return 1;
@@ -98,7 +100,7 @@ public class CpuSocket{
      *  @return 1 if device was successfully ejected, else error code (less than 0)
      */
     public int EjectDevice(){
-        if (IsFree() < 0){
+        if (IsFree() > 0){
             return -1;
         }
         device = null;

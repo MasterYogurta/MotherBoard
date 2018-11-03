@@ -9,6 +9,9 @@ public class CpuDevice{
     private double coreFrequency;
     private int powerRequierement;
 
+    // Empty default constructor
+    public CpuDevice(){ return; }
+
     /**
      *  Constructor configures CPU device
      *  @param vendorName: Vendor name in text format
@@ -26,7 +29,7 @@ public class CpuDevice{
     }
 
     /**
-     *  @brief functions below returns CPU device parameters
+     *  functions below returns CPU device parameters
      *  @param  none
      *  @return vendorName: Vendor name in text format
      *  @return socketType: Socket type in text format
@@ -39,4 +42,18 @@ public class CpuDevice{
      public int GetCoresNumber()       { return coresNumber; }
      public double GetCoreFrequency()  { return coreFrequency; }
      public int GetPowerRequierement() { return powerRequierement; }
+
+    /**
+     *  Funciton checks is device configured
+     *  @param  none
+     *  @return 1 if device successfully configured, else error code (less than 0)
+     */
+    public int IsConfigured(){
+        if (vendorName == null)     { return -1; }
+        if (socketType == null)     { return -2; }
+        if (coresNumber == 0)       { return -3; }
+        if (coreFrequency == 0)     { return -4; }
+        if (powerRequierement == 0) { return -5; }
+        return 1;
+    }
 }
