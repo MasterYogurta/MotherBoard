@@ -3,12 +3,17 @@
 package debug_log;
 
 public class DebugLog{
+    private final boolean useUserLog = true;
+    private final boolean useErrorLog = false;
+
     public void UserLog(String ... userMessage){
-        System.out.print("[MSG] : ");
-        for (String message : userMessage){
-            System.out.print(message);
+        if (useUserLog == true){
+            System.out.print("[MSG] : ");
+            for (String message : userMessage){
+                System.out.print(message);
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 
     /**
@@ -18,11 +23,17 @@ public class DebugLog{
      *  @return errorCode
      */
     public int ErrorLog(int errorCode, String ... errorMessage){
-        System.out.print("[ERR] : (" + errorCode + ") | ");
-        for (String message : errorMessage){
-            System.out.print(" " + message);
+        if (useErrorLog == true){
+            if (errorCode < 0){
+                System.out.print("[ERROR] : (" + errorCode + ") | ");
+            } else {
+                System.out.print("[SUC] : (" + errorCode + ") | ");
+            }
+            for (String message : errorMessage){
+                System.out.print(" " + message);
+            }
+            System.out.println();
         }
-        System.out.println();
         return errorCode;
     }
 }
