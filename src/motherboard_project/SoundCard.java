@@ -2,9 +2,13 @@
 
 package sound_card;
 
+import speaker_device.SpeakerDevice;
+
 public class SoundCard{
     private double supportedChannel = 0.0;
+    private SpeakerDevice device;
 
+    // Socket API --------------------------------------------------------------------------------------------
     /**
      *  Function configures supported channel
      *  @param  channel: Channel in decimal format
@@ -53,4 +57,48 @@ public class SoundCard{
         }
         return -1;
     }
+
+    // Device API --------------------------------------------------------------------------------------------
+    /**
+     *  Function checks is current socket free
+     *  @param  none
+     *  @return 1 if socket is free, else error code (less than 0)
+     */
+    public int IsFree(){
+        if (device == null){ return 1; }
+        return -1;
+    }
+
+    /**
+     *  Funciton inserts given device in socket
+     *  @param  device: Configured Speaker device object
+     *  @return 1 if device was successfully inserted, else error code (less than 0)
+     */
+    public int InsertDevice(SpeakerDevice device){
+        if (IsFree() < 0){                                              return -1;
+        } else if (IsReady() < 0){                                      return -2;
+        } else if (device == null){                                     return -3;
+        } else if (device.IsConfigured() < 0){                          return -4;
+        } else if (IfChannelSupported(device.GetChannel()) < 0){        return -5; }
+        this.device = device;
+        return 1;
+    }
+
+    /**
+     *  Function ejects device from socket
+     *  @param  none
+     *  @return 1 if device was successfully ejected, else error code (less than 0)
+     */
+    public int EjectDevice(){
+        if (IsFree() > 0){ return -1; }
+        device = null;
+        return 1;
+    }
+
+    /**
+     *  Function returns object with current inserted device
+     *  @param  none
+     *  @return @device
+     */
+    public SpeakerDevice GetDevice(){ return device; }
 }

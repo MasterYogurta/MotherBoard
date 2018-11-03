@@ -30,7 +30,6 @@ public class CpuDevice{
 
     /**
      *  functions below returns CPU device parameters
-     *  @param  none
      *  @return vendorName: Vendor name in text format
      *  @return socketType: Socket type in text format
      *  @return coresNumber: Number of CPU cores in decimal format
@@ -45,7 +44,6 @@ public class CpuDevice{
 
     /**
      *  Funciton checks is device configured
-     *  @param  none
      *  @return 1 if device successfully configured, else error code (less than 0)
      */
     public int IsConfigured(){
